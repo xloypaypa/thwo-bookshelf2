@@ -7,13 +7,12 @@ document.body.appendChild(Form.import.querySelector('.form'));
 window.onload = function () {
   var isbn = getQueryParam('isbn');
   if (isbn) {
-    httpRequest('GET', baseUrl + '/' + isbn, function (book) {
-      for (var key in tableHeaderMapper) {
-        document.querySelector('input[name="' + key + '"]').value = book[tableHeaderMapper[key]];
-      }
-      var isbnInput = document.querySelector('input[name="ISBN"]');
-      isbnInput.disabled = true;
-    });
+    /*在这里添加函数,从数据库中获取信息,并填充到表单中
+
+
+
+
+     */
   }
 
   var form = document.querySelector('.form');

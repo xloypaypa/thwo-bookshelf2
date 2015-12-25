@@ -6,15 +6,6 @@ var tableElements = [];
 window.onload = function () {
     var booksList = document.querySelector('tbody');
 
-    var deleteRow = function (isbn) {
-        var rows = booksList.getElementsByTagName('tr');
-        for (var i = 0; i < rows.length; ++i) {
-            if (rows[i].querySelector('.col-isbn').textContent === isbn) {
-                booksList.removeChild(rows[i]);
-            }
-        }
-    };
-
     var createRow = function (book) {
         var tr = document.createElement('tr');
 
@@ -39,11 +30,14 @@ window.onload = function () {
         var deleteBtn = document.createElement('a');
         deleteBtn.textContent = 'delete';
         deleteBtn.setAttribute('class', 'button');
-        deleteBtn.addEventListener('click', function () {
-            httpRequest('DELETE', baseUrl + '/' + book[tableHeaderMapper.ISBN], function () {
-                deleteRow(book[tableHeaderMapper.ISBN]);
-            });
-        });
+
+        /*在这里添加点击删除事件监听
+
+
+
+
+        */
+
         td.appendChild(deleteBtn);
 
         td.setAttribute('class', 'col-operates');
