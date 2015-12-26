@@ -6,12 +6,27 @@
   <link rel="stylesheet" href="./index.css">
   <link href="../../components/Header/index.html" rel="import" id="Header">
   <link href="../../components/Form/index.html" rel="import" id="Form">
+  <link href="../../components/Footer/index.html" rel="import" id="Footer">
   <script src="../../utils/httpRequest.js"></script>
   <script src="../../utils/getQueryParam.js"></script>
   <script src="../../config/Constants.js"></script>
 </head>
 <body>
-<script src="./index.js"></script>
+<script type="text/javascript">
+  var Header = document.querySelector('#Header');
+  document.body.appendChild(Header.import.querySelector('.g-head'));
+</script>
 
+<script type="text/javascript">
+  var Form = document.querySelector('#Form');
+  document.body.appendChild(Form.import.querySelector('.form'));
+</script>
+
+<script type="text/javascript">
+  var Footer = document.querySelector('#Footer');
+  document.body.appendChild(Footer.import.querySelector('.g-footer'));
+</script>
+
+<script src="./index.js"></script>
 </body>
 </html>

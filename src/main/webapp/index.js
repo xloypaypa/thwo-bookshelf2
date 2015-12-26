@@ -1,9 +1,5 @@
-var Header = document.querySelector('#Header');
-document.body.appendChild(Header.import.querySelector('.g-head'));
-
-var tableElements = [];
-
 window.onload = function () {
+    var tableElements = [];
     var booksList = document.querySelector('tbody');
 
     var createRow = function (book) {
@@ -36,7 +32,7 @@ window.onload = function () {
 
 
 
-        */
+         */
 
         td.appendChild(deleteBtn);
 

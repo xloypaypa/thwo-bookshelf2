@@ -1,9 +1,3 @@
-var Header = document.querySelector('#Header');
-document.body.appendChild(Header.import.querySelector('.g-head'));
-
-var Form = document.querySelector('#Form');
-document.body.appendChild(Form.import.querySelector('.form'));
-
 window.onload = function () {
   var isbn = getQueryParam('isbn');
   if (isbn) {

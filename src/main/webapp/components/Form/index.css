@@ -1,28 +1,29 @@
 .form {
-  position: relative;
-  padding: 0 57rem;
-  margin-top: 3rem;
+    position: relative;
+    padding: 0 57rem;
+    margin-top: 3rem;
+    margin-bottom: 60px;
 }
 
 .form__element {
-  margin-bottom: .5rem;
+    margin-bottom: .5rem;
 }
 
 .form__element--text-left {
-  font-size: 2rem;
-  text-align: left;
+    font-size: 2rem;
+    text-align: left;
 }
 
 .form__element--input-right {
-  font-size: 2rem;
-  float: right;
+    font-size: 2rem;
+    float: right;
 }
 
 .form__element--submit {
-  font-size: 2rem;
-  width: 13rem;
-  float: right;
-  border-radius: 4px;
-  background-color: #317EE7;
-  border-color: #317EE7;
+    font-size: 2rem;
+    width: 13rem;
+    float: right;
+    border-radius: 4px;
+    background-color: #317EE7;
+    border-color: #317EE7;
 }

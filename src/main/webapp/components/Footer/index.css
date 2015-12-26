@@ -1,0 +1,11 @@
+/* ========= foot ========== */
+
+.g-footer{
+    clear: both;
+    color: #999999;
+    margin: 0 auto;
+    padding: 10px 0 20px;
+    text-align: center;
+    border-top: 1px dashed rgb(211, 198, 188);
+    width: 950px;
+}
