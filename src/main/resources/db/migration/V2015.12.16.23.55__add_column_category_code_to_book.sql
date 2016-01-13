@@ -1,4 +1,4 @@
-ALTER TABLE WO_BOOK
-ADD COLUMN CATEGORY_CODE VARCHAR(10) NULL;
-ALTER TABLE WO_BOOK
-ADD CONSTRAINT FK_CATEGORY_CODE FOREIGN KEY(CATEGORY_CODE) REFERENCES WO_CATEGORY(CODE);
+alter table wo_book
+add column category_code varchar(10) null;
+alter table wo_book
+add constraint fk_category_code foreign key(category_code) references wo_category(code);

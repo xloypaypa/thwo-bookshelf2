@@ -1,2 +1,2 @@
-ALTER TABLE WO_BOOK
-CHANGE COLUMN NAME TITLE VARCHAR(100) NOT NULL;
+alter table wo_book
+change column name title varchar(100) not null;

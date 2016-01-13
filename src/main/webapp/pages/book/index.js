@@ -1,12 +1,15 @@
 window.onload = function () {
   var isbn = getQueryParam('isbn');
   if (isbn) {
-    /*在这里添加函数,从数据库中获取信息,并填充到表单中
 
-
-
-
-     */
+    httpRequest('GET', baseUrl + '/' + isbn, function (book) {
+             document.querySelector('[name=Title]').value = book.title;
+             document.querySelector('[name=Author]').value = book.author;
+             var isbn = document.querySelector('[name=ISBN]');
+             isbn.value = book.isbn;
+             isbn.disabled="true";
+             document.querySelector('[name="Price($)"]').value = book.price;
+        });
   }
 
   var form = document.querySelector('.form');
@@ -18,6 +21,7 @@ window.onload = function () {
       book[tableHeaderMapper[formElements[i].name]] = formElements[i].value;
     }
     if (isbn) {
+      var para = document.createElement("p");
       httpRequest('PUT', baseUrl + '/' + isbn, function () {
         location.href = '/index.html';
       }, book);

@@ -1,9 +1,9 @@
-DROP TABLE IF EXISTS WO_BOOK;
-CREATE TABLE WO_BOOK (
-  ISBN VARCHAR(30) PRIMARY KEY,
-  NAME VARCHAR(100) NOT NULL,
-  AUTHOR VARCHAR(50) NOT NULL,
-  PRICE DOUBLE NOT NULL
+drop table if exists wo_book;
+create table wo_book (
+  isbn varchar(30) primary key,
+  name varchar(100) not null,
+  author varchar(50) not null,
+  price double not null
 );
 
-INSERT INTO WO_BOOK(ISBN, NAME, AUTHOR, PRICE) VALUES('isbn', 'book name', 'author', 55.20);
+insert into wo_book(isbn, name, author, price) values('isbn', 'book name', 'author', 55.20);

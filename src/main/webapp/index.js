@@ -26,13 +26,11 @@ window.onload = function () {
         var deleteBtn = document.createElement('a');
         deleteBtn.textContent = 'delete';
         deleteBtn.setAttribute('class', 'button');
-
-        /*在这里添加点击删除事件监听
-
-
-
-
-         */
+        deleteBtn.onclick = function () {
+          httpRequest('DELETE', '/books/' + book[tableHeaderMapper.ISBN], function(){
+            tr.parentNode.removeChild(tr);
+          });
+        }
 
         td.appendChild(deleteBtn);
 
