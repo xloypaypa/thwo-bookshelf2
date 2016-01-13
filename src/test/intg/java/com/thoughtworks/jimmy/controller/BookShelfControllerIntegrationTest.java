@@ -4,8 +4,9 @@ import static java.lang.String.format;
 import static java.util.Arrays.asList;
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.Assert.assertEquals;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -21,6 +22,7 @@ import com.thoughtworks.jimmy.entity.BookEntity;
 import com.thoughtworks.jimmy.entity.CategoryEntity;
 import com.thoughtworks.jimmy.repository.BookRepository;
 import com.thoughtworks.jimmy.repository.CategoryRepository;
+import org.springframework.web.util.NestedServletException;
 
 
 public class BookShelfControllerIntegrationTest extends SpringBootWebApplicationTests {
@@ -92,6 +94,69 @@ public class BookShelfControllerIntegrationTest extends SpringBootWebApplication
                 .andExpect(jsonPath("$", hasSize(2)))
                 .andExpect(jsonPath("$[0].title").value("Head First Java"))
                 .andExpect(jsonPath("$[1].title").value("Basic Java Learning"));
+    }
+
+    @Test
+    public void should_be_able_to_update_book_to_shelf() throws Exception {
+        bookRepository.save(asList(
+                new BookEntity("12345", "Head First Java", "you", 55.6),
+                new BookEntity("45678", "Basic Java Learning", "she", 32.5),
+                new BookEntity("89234", "Other Books Basic", "me", 12.5)));
+
+        BookEntity bookEntity = new BookEntity("12345", "1", "1", 1.0);
+        String bookEntityJson = new Gson().toJson(bookEntity);
+
+        mockMvc.perform(put("/books/12345")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(bookEntityJson));
+
+        BookEntity fetchBook = bookRepository.findOne(bookEntity.getIsbn());
+        assertEquals(bookEntity.getIsbn(), fetchBook.getIsbn());
+        assertEquals(bookEntity.getTitle(), fetchBook.getTitle());
+    }
+
+    @Test
+    public void should_not_be_able_to_update_book_to_shelf_when_isbn_is_not_same() throws Exception {
+        BookEntity old = new BookEntity("12345", "Head First Java", "you", 55.6);
+        bookRepository.save(asList(
+                old,
+                new BookEntity("45678", "Basic Java Learning", "she", 32.5),
+                new BookEntity("89234", "Other Books Basic", "me", 12.5)));
+
+        BookEntity bookEntity = new BookEntity("1", "1", "1", 1.0);
+        String bookEntityJson = new Gson().toJson(bookEntity);
+
+        mockMvc.perform(put("/books/12345")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(bookEntityJson));
+
+        BookEntity fetchBook = bookRepository.findOne(old.getIsbn());
+        assertEquals(old.getIsbn(), fetchBook.getIsbn());
+        assertEquals(old.getTitle(), fetchBook.getTitle());
+    }
+
+    @Test
+    public void should_be_able_to_delete_book_from_shelf() throws Exception {
+        BookEntity old = new BookEntity("12345", "Head First Java", "you", 55.6);
+        bookRepository.save(asList(
+                old,
+                new BookEntity("45678", "Basic Java Learning", "she", 32.5),
+                new BookEntity("89234", "Other Books Basic", "me", 12.5)));
+
+        mockMvc.perform(delete("/books/12345"));
+        assertNull(bookRepository.findOne(old.getIsbn()));
+    }
+
+    @Test (expected = NestedServletException.class)
+    public void should_now_be_able_to_delete_book_from_shelf_when_give_invalid_isbn() throws Exception {
+        BookEntity old = new BookEntity("12345", "Head First Java", "you", 55.6);
+        bookRepository.save(asList(
+                old,
+                new BookEntity("45678", "Basic Java Learning", "she", 32.5),
+                new BookEntity("89234", "Other Books Basic", "me", 12.5)));
+
+        mockMvc.perform(delete("/books/123456"));
+        assertNotNull(bookRepository.findOne(old.getIsbn()));
     }
 
     @Test
